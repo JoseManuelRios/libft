@@ -6,7 +6,7 @@
 /*   By: jrios-ag <josemanueljbk99@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 20:38:20 by jrios-ag          #+#    #+#             */
-/*   Updated: 2025/05/05 19:56:43 by jrios-ag         ###   ########.fr       */
+/*   Updated: 2025/05/06 13:29:28 by jrios-ag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int	ft_strlcpy(char *dest, char *src, size_t size)
 	size_t	x;
 
 	x = 0;
-	if (size == 0)
-		return (ft_strlen(src)); 
+	if (size <= 0)
+		return (ft_strlen(src));
 	while (src[x])
 	{
 		if (x < (size - 1))
@@ -28,7 +28,8 @@ int	ft_strlcpy(char *dest, char *src, size_t size)
 		x++;
 
 	}
-	dest[x] = '\0';
+	if (x < size)
+		dest[x] = '\0';
 	return (x);
 }
 /*
