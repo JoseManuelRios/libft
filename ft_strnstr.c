@@ -1,35 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrios-ag <josemanueljbk99@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/25 16:07:37 by jrios-ag          #+#    #+#             */
-/*   Updated: 2025/05/11 10:51:02 by jrios-ag         ###   ########.fr       */
+/*   Created: 2025/05/12 15:46:50 by jrios-ag          #+#    #+#             */
+/*   Updated: 2025/05/12 16:46:52 by jrios-ag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_strlcat(char *dest, char *src, size_t size)
+char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	size_t	x;
-	size_t	dest_len;
-	size_t	src_len;
+	size_t x;
+	size_t y;
+	char *big2;
 
 	x = 0;
-	dest_len = ft_strlen(dest);
-	src_len = ft_strlen(src);
-	if (size < 1)
-		return (src_len);
-	if (dest_len >= size)
-		return (src_len + size);
-	while (src[x] != '\0' && x < size - dest_len - 1)
+	y = 0;
+	big2 = (char *) big;
+	if (little[x] == '\0')
+		return (big2);
+	while (big2[x] && x < len)
 	{
-		dest[dest_len + x] = src[x];
+		y = 0;
+		if (big2[x] == little[y])
+		{
+			while (big2[x + y] == little[y] && (x + y) < len && little[y])
+				y++;
+			if (little[y] == '\0')
+				return (&big2[x]);
+		}
 		x++;
 	}
-	dest[dest_len + x] = '\0';
-	return (dest_len + src_len);
+	return (NULL);
 }
