@@ -1,39 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrios-ag <josemanueljbk99@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/12 16:48:14 by jrios-ag          #+#    #+#             */
-/*   Updated: 2025/05/16 16:08:57 by jrios-ag         ###   ########.fr       */
+/*   Created: 2025/05/16 16:10:05 by jrios-ag          #+#    #+#             */
+/*   Updated: 2025/05/16 17:06:52 by jrios-ag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(const char *nptr)
+static char	*ft_strcpy(char *dst, const char *src)
 {
 	int	i;
-	int	sign;
-	int	num;
 
 	i = 0;
-	sign = 1;
-	num = 0;
-	while ((nptr[i] >= 9 && nptr[i] <= 13) || nptr[i] == 32)
-		i++;
-	if (nptr[i] == '-' || nptr[i] == '+')
+	while (src[i] != '\0')
 	{
-		if (nptr[i] == '-')
-			sign = -1;
+		dst[i] = src[i];
 		i++;
 	}
-	while (nptr[i] != '\0' && nptr[i] >= '0' && nptr[i] <= '9')
-	{
-		num = num * 10 + nptr[i] - 48;
-		i++;
-	}
-	num = num * sign;
-	return (num);
+	dst[i] = '\0';
+	return (dst);
+}
+
+char	*ft_strdup(const char *s1)
+{
+	char	*dst;
+
+	dst = (char *)malloc((ft_strlen(s1) + 1) * sizeof(char));
+	if (dst == NULL)
+		return (NULL);
+	ft_strcpy(dst, s1);
+	return (dst);
 }
